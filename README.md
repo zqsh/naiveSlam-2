@@ -1,5 +1,6 @@
 # naiveSlam-2
 make naiveSlam great again!  
+see RESULT_.png for program result.  
 
 # Todo:
 1\detail descreption.  
