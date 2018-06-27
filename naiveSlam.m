@@ -1,4 +1,4 @@
-%%%%%%%%%% Final  Project: Mono vision Odometry %%%%%%%%%%%
+%%%%%%%%%% naiveSLam: Mono vision Odometry %%%%%%%%%%%
 % Author: zqs
 % Mail: zqsh19970218@sjtu.edu.cn
 
