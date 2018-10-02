@@ -9,14 +9,15 @@ clc;
 %% initialize variables
 format shortG
 % warning off
-dataset = 0; % 0: KITTI, 1: others.//todo
+dataset = 0; % 0: KITTI, 1: others. //todo
 last_frame = 1000;
 tic
 %rng(1);
 global dataBaseSize;
 
 %% set up relevant paths
-
+%% edit path here!!!
+global kitti_path;
 kitti_path = 'G:\data_odometry_gray\dataset\sequences';
 
 if exist(kitti_path) == 7
@@ -25,6 +26,7 @@ if exist(kitti_path) == 7
     ground_truth = load([kitti_path '\pose\00.txt']);
     ground_truth = ground_truth(:, [end-8 end]);
 else
+    disp('Please edit right path')
     assert(false);
 end
 v = VideoWriter(videoName,'MPEG-4');
@@ -32,13 +34,13 @@ v.FrameRate = 5;
 open(v)
 %tmp
 K = K1;
-%% bootstrap / initialization of keypoint matching between adjacent frames
+%% initialization of keypoint matching between adjacent frames
  fprintf('\n\nProcessing frame %d\n=====================\n', 1);
 [firstKeypoints,firstLandmarks] = autoMonoInitialization(dataset,K,eye(3,4));
 prevState = [firstKeypoints;firstLandmarks(1:3,:)];
 prevImage = imread([kitti_path '/00/image_0/' sprintf('%06d.png',1)]);
 
-%% Continuous operation
+%% main
 dataBase = cell(3,dataBaseSize);
 for ii = 2:last_frame
     fprintf('\n\nProcessing frame %d\n=====================\n', ii);
@@ -49,7 +51,7 @@ for ii = 2:last_frame
         assert(false);
     end
 
-    %check to see if we're close and if so, re initialize
+    % re initialize
     if(isempty(currState))
         disp('Lost, will have to reinitialize from last pose')
         if dataset == 0
@@ -81,7 +83,7 @@ for ii = 2:last_frame
     run plotAll
     end
 
-    % Makes sure that plots refresh.
+    % plots refresh.
     pause(0.01);
 
 end

@@ -24,5 +24,3 @@ set(hline(1,2),'facecolor',colors(2,:));
 set(hhead(1,2),'facecolor',colors(2,:));
 set(hline(1,3),'facecolor',colors(3,:));
 set(hhead(1,3),'facecolor',colors(3,:));
-
-

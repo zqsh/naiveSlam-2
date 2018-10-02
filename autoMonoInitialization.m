@@ -1,7 +1,6 @@
 function [firstKeypoints,firstLandmarks] = autoMonoInitialization(dataset,K,initialPose)
 
 % indicate first two images for bootstrapping
-% Parameters from exercise 3.
 global harris_patch_size;
 global harris_kappa;
 global nonmaximum_supression_radius;
@@ -13,8 +12,7 @@ global triangulationTolerance;
 global initializationIterations;
 
 disp('Initializing Automatically...')
-
-    kitti_path = 'G:\data_odometry_gray\dataset\sequences';
+    global kitti_path;
 
     if dataset == 0
         img0 = imread([kitti_path '/00/image_0/' ...
@@ -121,7 +119,6 @@ end
             p2_sample = p1(:,idx);
 
             % how many sample points do I need?
-            % in exercise: done with landmark indices...
 
             F_candidate = fundamentalEightPoint_normalized(p1_sample,p2_sample);
             % E_candidate = estimateEssentialMatrix(p1_sample,p2_sample,K,K);
